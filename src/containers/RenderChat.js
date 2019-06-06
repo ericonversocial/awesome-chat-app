@@ -19,7 +19,7 @@ const mergeProps = (propsFromState, propsFromDispatch) => {
 
   return {
     onEnter: (e) => {
-      if (activeChat && e.keyCode === 13 && e.shiftKey === false) {
+      if (activeChat && e.keyCode === 13 && e.shiftKey === false && e.target.value !== '') {
         propsFromDispatch.sendMessage(propsFromState.activeChat, new Date(), e.target.value)
         propsFromDispatch.replyMessage(propsFromState.activeChat, new Date(), 'You said: ' + e.target.value)
         propsFromDispatch.updateLastMessage(propsFromState.activeChat)

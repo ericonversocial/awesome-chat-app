@@ -20,6 +20,8 @@ class Chat extends React.Component {
   }
 
   componentDidUpdate() {
+    var el = this.refs.message;
+    el.scrollTop = el.scrollHeight;
     this.scrollToBottom();
   }
 
@@ -59,7 +61,7 @@ class Chat extends React.Component {
 
     return (
       <div className="Conversation" style={style_conversation}>
-        <div className="Message" style={style_message}>
+        <div className="Message" ref="message" style={style_message}>
           {this.props.messageList.map(message => {
             if (message.fromUser) {
               return (
