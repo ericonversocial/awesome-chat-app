@@ -10,6 +10,11 @@ import {
   WELCOME_MESSAGE
 } from '../constants/ActionTypes';
 
+
+export const timeNow = new Date();
+export var newTime = null;
+export var sendTime = null;
+export var replyTime = null;
 const initialState = {
   activeChat: 0,
   chatList: 
@@ -20,7 +25,7 @@ const initialState = {
       [
         { 
           id: 0,
-          time: new Date(),
+          time: timeNow,
           message: WELCOME_MESSAGE,
           fromUser: false,
         }
@@ -34,6 +39,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_CHAT:
+      newTime = new Date();
       return {
         activeChat: action.id,
         chatList:
@@ -45,7 +51,7 @@ export default (state = initialState, action) => {
               [
                 { 
                   id: 0,
-                  time: new Date(),
+                  time: newTime,
                   message: WELCOME_MESSAGE,
                   fromUser: false
                 }
@@ -64,6 +70,7 @@ export default (state = initialState, action) => {
       }
 
     case SEND_MESSAGE: {
+      sendTime = action.time;
       let chat = state.chatList.find((chat) => chat.id === action.id);
       const nextId = chat.messageList[chat.messageList.length-1].id + 1;
       const newMessage = {
